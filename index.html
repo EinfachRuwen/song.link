@@ -213,11 +213,15 @@
                         $('#error-message').hide();
                     })
                     .fail(function(jqxhr, textStatus, error) {
-                        var err = textStatus + ", " + error;
+                        var err = textStatus + ", " + error + ", " + jqxhr.responseText;
                         $('#error-message').text(`Request Failed: ${err}`);
                         $('#error-message').show();
                         alert(`Request Failed: ${err}`);
                     });
+            } else {
+                $('#error-message').text('Please enter a valid link.');
+                $('#error-message').show();
+                alert('Please enter a valid link.');
             }
         });
 
