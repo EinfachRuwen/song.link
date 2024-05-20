@@ -205,8 +205,10 @@
                     url: apiUrl,
                     method: 'GET',
                     dataType: 'json',
-                    success: function(data) {
+                    success: function(data, textStatus, jqXHR) {
                         console.log('API Response:', data);  // Debugging Information
+                        console.log('Status:', textStatus);
+                        console.log('jqXHR:', jqXHR);
                         var links = data.linksByPlatform;
                         $('#result_links').empty();
                         for (var platform in links) {
@@ -219,7 +221,7 @@
                         $('#error-message').hide();
                     },
                     error: function(jqxhr, textStatus, error) {
-                        var err = textStatus + ", " + error + ", " + jqxhr.responseText;
+                        var err = `${textStatus}, ${error}, ${jqxhr.status} ${jqxhr.statusText}, ${jqxhr.responseText}`;
                         console.log(`Error Details: ${err}`);  // Debugging Information
                         $('#error-message').text(`Request Failed: ${err}`);
                         $('#error-message').show();
