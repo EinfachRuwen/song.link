@@ -199,11 +199,12 @@
         $('#convert_button').on('click', async function() {
             const link = $('#music_link').val();
             if (link) {
-                const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-                const apiUrl = `${proxyUrl}https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(link)}&userCountry=DE`;
-                console.log(`Requesting URL: ${apiUrl}`);  // Debugging Information
+                const proxyUrl = 'https://api.allorigins.win/get?url=';
+                const apiUrl = `https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(link)}&userCountry=DE`;
+                const requestUrl = `${proxyUrl}${encodeURIComponent(apiUrl)}`;
+                console.log(`Requesting URL: ${requestUrl}`);  // Debugging Information
                 try {
-                    const response = await fetch(apiUrl, { method: 'GET' });
+                    const response = await fetch(requestUrl);
                     if (!response.ok) {
                         const errorDetails = `HTTP status ${response.status} (${response.statusText})`;
                         console.error(`API Request failed: ${errorDetails}`);  // Debugging Information
@@ -212,7 +213,8 @@
                         alert(`Request Failed: ${errorDetails}`);
                         return;
                     }
-                    const data = await response.json();
+                    const json = await response.json();
+                    const data = JSON.parse(json.contents);
                     console.log('API Response:', data);  // Debugging Information
                     const links = data.linksByPlatform;
                     $('#result_links').empty();
