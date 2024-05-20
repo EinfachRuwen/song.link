@@ -212,8 +212,11 @@
                         $('#results').show();
                         $('#error-message').hide();
                     })
-                    .fail(function() {
+                    .fail(function(jqxhr, textStatus, error) {
+                        var err = textStatus + ", " + error;
+                        $('#error-message').text(`Request Failed: ${err}`);
                         $('#error-message').show();
+                        alert(`Request Failed: ${err}`);
                     });
             }
         });
@@ -236,6 +239,7 @@
             } catch (err) {
                 console.error('Konnte den Link nicht kopieren: ', err);
                 M.toast({html: 'Fehler beim Kopieren des Links!'});
+                alert(`Copy Failed: ${err}`);
             }
             document.body.removeChild(tempInput);
         }
