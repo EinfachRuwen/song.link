@@ -199,8 +199,12 @@
         $('#convert_button').on('click', function() {
             var link = $('#music_link').val();
             if (link) {
-                $.getJSON(`https://api.song.link/v1-alpha.1/links?url=${link}&userCountry=DE`)
-                    .done(function(data) {
+                const apiUrl = `https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(link)}&userCountry=DE`;
+                $.ajax({
+                    url: apiUrl,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
                         var links = data.linksByPlatform;
                         $('#result_links').empty();
                         for (var platform in links) {
@@ -211,13 +215,14 @@
                         }
                         $('#results').show();
                         $('#error-message').hide();
-                    })
-                    .fail(function(jqxhr, textStatus, error) {
+                    },
+                    error: function(jqxhr, textStatus, error) {
                         var err = textStatus + ", " + error + ", " + jqxhr.responseText;
                         $('#error-message').text(`Request Failed: ${err}`);
                         $('#error-message').show();
-                        alert(`Request Failed: ${err}`);
-                    });
+                        alert(`Request Failed: ${${err}`);
+                    }
+                });
             } else {
                 $('#error-message').text('Please enter a valid link.');
                 $('#error-message').show();
