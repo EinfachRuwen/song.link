@@ -59,6 +59,10 @@ export default function Home() {
   }
 
   return (
+    <>
+      <head>
+        <link rel="icon" href="favicon.ico" />
+      </head>
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20 transition-colors duration-300">
       <main className="container mx-auto flex flex-col items-center justify-center min-h-screen gap-8 px-4 py-16">
         <motion.div
