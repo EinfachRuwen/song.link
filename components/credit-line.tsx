@@ -18,6 +18,11 @@ export function CreditLine() {
       >
         Created by EinfachRuwen
       </Link>
+      <span className="block mt-2 text-xs">
+        <a href="https://focusonruwen.com/impressum" target="_blank" rel="noopener" className="hover:text-primary">Impressum</a>
+        {" · "}
+        <a href="https://focusonruwen.com/datenschutz" target="_blank" rel="noopener" className="hover:text-primary">Datenschutz</a>
+      </span>
     </motion.div>
   )
 }
